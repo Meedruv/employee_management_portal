@@ -44,9 +44,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employee Not Found" + employeeId));
 
-        employee.setFirstName(updatedEmployee.getFirstName());
-        employee.setLastName(updatedEmployee.getLastName());
+        employee.setName(updatedEmployee.getName());
         employee.setEmail(updatedEmployee.getEmail());
+        employee.setPosition(updatedEmployee.getPosition());
+        employee.setSalary(updatedEmployee.getSalary());
 
         Employee updatedEmployeeObj = employeeRepository.save(employee);
 
@@ -56,8 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployee(long employeeId) {
-        Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee Not Found" + employeeId));
+        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() -> new ResourceNotFoundException("Employee Not Found" + employeeId));
 
         employeeRepository.deleteById(employeeId);
     }
